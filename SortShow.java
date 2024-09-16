@@ -91,6 +91,7 @@ public class SortShow extends JPanel {
 			// getting the date and time when the selection sort starts
 			Calendar start = Calendar.getInstance();
 			// Using the selection sort to lines_lengths sort the array
+			
 			for (int i = 1; i < lines_lengths.length; i++) {
 				int key = lines_lengths[1];
 				int j = i - 1;
@@ -107,7 +108,7 @@ public class SortShow extends JPanel {
 			Calendar end = Calendar.getInstance();
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
-			SortGUI.selectionTime = end.getTime().getTime() - start.getTime().getTime();
+			SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
 		}
 
 		public void BubbleSort() {
@@ -138,7 +139,7 @@ public class SortShow extends JPanel {
 			Calendar end = Calendar.getInstance();
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
-			SortGUI.selectionTime = end.getTime().getTime() - start.getTime().getTime();
+			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
 		}
 
 		//this method gets the smallest element in the array of lines_lengths
