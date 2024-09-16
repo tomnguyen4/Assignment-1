@@ -81,7 +81,7 @@ public class SortGUI {
 		JLabel insertion_time_label = new JLabel("Insertion Time");
 		JLabel insertion_time_taken = new JLabel("");
 
-		JLabel bubble_time_label = new JLabel("Bubble sort Time");
+		JLabel bubble_time_label = new JLabel("Bubble Time");
 		JLabel bubble_time_taken = new JLabel("");
 
 		
@@ -109,6 +109,10 @@ public class SortGUI {
 			imerge_time_taken.setForeground(Color.RED);
 			//The selection button text will be the colour blue
 			selection.setForeground(Color.BLUE);
+
+			insertion.setForeground(Color.BLUE);
+
+			bubble.setForeground(Color.BLUE);
 			//The recursive merge button text will be the colour blue
 			rmerge.setForeground(Color.BLUE);
 			//The iterative merge button text will be the colour blue
@@ -215,7 +219,7 @@ public class SortGUI {
 					// Selection sort has finished/been clicked
 					Insertion_Done = true;
 					// The amount of time taken for selection sort took
-					insertion_time_taken.setText(selectionTime / 1000 + " Seconds");
+					insertion_time_taken.setText(insertionTime / 1000 + " Seconds");
 					// setting all booleans false except for reset
 					Set_Available_Chooses(false, false, false, false, false, true);
 				}
@@ -228,7 +232,7 @@ public class SortGUI {
 					// Selection sort has finished/been clicked
 					Bubble_Done = true;
 					// The amount of time taken for selection sort took
-					bubble_time_taken.setText(selectionTime / 1000 + " Seconds");
+					bubble_time_taken.setText(bubbleTime / 1000 + " Seconds");
 					// setting all booleans false except for reset
 					Set_Available_Chooses(false, false, false, false,false, true);
 				}
