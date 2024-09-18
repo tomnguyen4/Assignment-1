@@ -72,11 +72,12 @@ public class SortShow extends JPanel {
 			//getting the date and time when the selection sort starts
 			Calendar start = Calendar.getInstance();
 			//Using the selection sort to lines_lengths sort the array
-			for (int i = 0; i < lines_lengths.length; i++) {
-				int smallestindex = getIndexOfSmallest(i, lines_lengths.length);
-				if (smallestindex < lines_lengths[1]) {
-					swap(i, smallestindex);
-				}
+			for (int i = 0; i < lines_lengths.length - 1; i++) {
+				int smallestindex = getIndexOfSmallest(i);
+				swap(i, smallestindex);
+				// Display the current state of the lines_lengths array after every swap
+				paintComponent(this.getGraphics());
+				delay(10);
 			}
 			//You need to complete this part.
 
@@ -85,6 +86,7 @@ public class SortShow extends JPanel {
 			//getting the time it took for the selection sort to execute 
 			//subtracting the end time with the start time
 			SortGUI.selectionTime = end.getTime().getTime() - start.getTime().getTime();
+			reset();
 		}
 		
 		public void InsertionSort() {
@@ -93,22 +95,24 @@ public class SortShow extends JPanel {
 			// Using the selection sort to lines_lengths sort the array
 			
 			for (int i = 1; i < lines_lengths.length; i++) {
-				int key = lines_lengths[1];
+				int key = lines_lengths[i];
 				int j = i - 1;
-
 				while (j >= 0 && lines_lengths[j] > key) {
 					lines_lengths[j + 1] = lines_lengths[j];
-					j = j - 1;
-
+					j--;
 				}
 				lines_lengths[j + 1] = key;
-
+				// Display the current state of the lines_lengths array after each iteration
+				paintComponent(this.getGraphics());
+				
+				delay(10);
 			}
 
 			Calendar end = Calendar.getInstance();
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
 			SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
+			reset();
 		}
 
 		public void BubbleSort() {
@@ -119,44 +123,33 @@ public class SortShow extends JPanel {
 			int j=0;
 			boolean swapped;
 
-			for (i = 0; i < lines_lengths[lines_lengths.length - 1]; i++) {
-				
-				swapped = false;
-
-				for (j = 0; j < lines_lengths[lines_lengths.length - i - 1]; j++) {
+			for ( i = 0; i < lines_lengths.length - 1; i++) {
+				for ( j = 0; j < lines_lengths.length - i - 1; j++) {
 					if (lines_lengths[j] > lines_lengths[j + 1]) {
-						swap(lines_lengths[j], lines_lengths[j + 1]);
-						swapped = true;
+						swap(j, j + 1);
 					}
 				}
-
-				if (swapped == false){
-					break;
-				}
-				
+				// Display the current state of the lines_lengths array after each iteration
+				paintComponent(this.getGraphics());
+				delay(10);
 			}
 
 			Calendar end = Calendar.getInstance();
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
 			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
+			reset();
 		}
 
 		//this method gets the smallest element in the array of lines_lengths
-		public int getIndexOfSmallest(int first, int last){
-
-			//You need to complete this part.
-			int smallestIndex = first;
-
-			// Iterate over the array from 'first' to 'last' and find the index of the
-			// smallest element
-			for (int i = first + 1; i <= last; i++) {
-				if (lines_lengths[i] < lines_lengths[smallestIndex]) {
-					smallestIndex = i;
+		public int getIndexOfSmallest(int first) {
+			int smallestindex = first;
+			for (int i = first + 1; i < lines_lengths.length; i++) {
+				if (lines_lengths[i] < lines_lengths[smallestindex]) {
+					smallestindex = i;
 				}
 			}
-
-			return 1; //modify this line
+			return smallestindex;
 		}
 		
 	///////////////////////////////////////////////////////////////////////////////////
