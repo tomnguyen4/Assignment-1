@@ -86,7 +86,7 @@ public class SortShow extends JPanel {
 			//getting the time it took for the selection sort to execute 
 			//subtracting the end time with the start time
 			SortGUI.selectionTime = end.getTime().getTime() - start.getTime().getTime();
-			reset();
+			
 		}
 		
 		public void InsertionSort() {
@@ -112,7 +112,7 @@ public class SortShow extends JPanel {
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
 			SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
-			reset();
+			
 		}
 
 		public void BubbleSort() {
@@ -138,7 +138,7 @@ public class SortShow extends JPanel {
 			// getting the time it took for the selection sort to execute
 			// subtracting the end time with the start time
 			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
-			reset();
+			
 		}
 
 		//this method gets the smallest element in the array of lines_lengths
@@ -159,8 +159,10 @@ public class SortShow extends JPanel {
 			//getting the date and time when the recursive merge sort starts
 			Calendar start = Calendar.getInstance();
 			//assigning the size for the tempArray below
+			tempArray = new int[total_number_of_lines]; 
 
 			//You need to complete this part.
+			R_MergeSort(0, total_number_of_lines - 1);
 
 			Calendar end = Calendar.getInstance();
 			//getting the time it took for the iterative merge sort to execute
@@ -174,9 +176,18 @@ public class SortShow extends JPanel {
 			if(first < last){
 
 				//You need to complete this part.
+				int mid = (first + last) / 2;
 
+				R_MergeSort(first, mid);
+
+				R_MergeSort(mid + 1, last);
+
+				R_Merge(first, mid, last);
 				//Causing a delay for 10ms
-				//delay(10);
+				delay(10);
+
+				paintComponent(this.getGraphics());
+
 			}
 		}
 
@@ -185,11 +196,101 @@ public class SortShow extends JPanel {
 		public void R_Merge(int first, int mid, int last){
 
 			//You need to complete this part.
-				
+			int beginHalf1 = first;
+			int endHalf1 = mid;
+			int beginHalf2 = mid + 1;
+			int endHalf2 = last;
+
+			
+			int index = beginHalf1;
+
+			// Merge the two halves into tempArray
+			while (beginHalf1 <= endHalf1 && beginHalf2 <= endHalf2) {
+				if (lines_lengths[beginHalf1] < lines_lengths[beginHalf2]) {
+					tempArray[index] = lines_lengths[beginHalf1];
+					beginHalf1++;
+				} else {
+					tempArray[index] = lines_lengths[beginHalf2];
+					beginHalf2++;
+				}
+				index++;
+			}
+
+			//iterate through copying the elemetns. 
+			while (beginHalf1 <= endHalf1) {
+				tempArray[index] = lines_lengths[beginHalf1];
+				beginHalf1++;
+				index++;
+			}
+
+			//iterate through to get the elements from the second half
+			while (beginHalf2 <= endHalf2) {
+				tempArray[index] = lines_lengths[beginHalf2];
+				beginHalf2++;
+				index++;
+			}
+
+			//temp array used to update the original array with updated positions. 
+			for (index = first; index <= last; index++) {
+				lines_lengths[index] = tempArray[index];
+			}
 		}
 		
 		//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
+		//Recursive quick sort method
+		public void Quick_Sort_Recursive() {
+			//getting the date and time when the recursive merge sort starts
+			Calendar start = Calendar.getInstance();
+
+			//You need to complete this part.
+			Quick_Sort_Recursive(0, total_number_of_lines - 1);
+
+			Calendar end = Calendar.getInstance();
+			//getting the time it took for the iterative merge sort to execute
+			//subtracting the end time with the start time
+	        SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
+			
+		}
+
+		public void Quick_Sort_Recursive(int low, int high) {
+			if (low < high) {
+				//Quick sort starts with partition, which returns the pivot
+				int pivotIndex = partition(low, high);
+		
+				//Start again but with new pivot index. 
+				Quick_Sort_Recursive(low, pivotIndex - 1);
+				Quick_Sort_Recursive(pivotIndex + 1, high);
+		
+				//set delay so changes can be seen.
+				delay(10);
+		
+				//redrawing the graphic
+				paintComponent(this.getGraphics());
+			}
+		}
+		
+		public int partition(int low, int high) {
+			//pivot is the last element of the partition, like done in class
+			int pivot = lines_lengths[high];
+		
+			int i = low - 1;
+		
+			//pivot used to rearrange
+			for (int j = low; j < high; j++) {
+				if (lines_lengths[j] < pivot) {
+					i++;
+					//swap functin used in other sorts
+					swap(i, j);
+				}
+			}
+		
+			swap(i + 1, high);
+		
+			//pivot value returned
+			return i + 1; 
+		}
 	//////////////////////////////////////////////////////////////////////////////////////////
 		
 		//iterative merge sort method
