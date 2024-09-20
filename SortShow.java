@@ -73,7 +73,7 @@ public class SortShow extends JPanel {
 			for(int exp = 1; max / exp > 0; exp *= 10){
 				countingSort(lines_lengths, exp);
 				paintComponent(this.getGraphics());
-				delay(10);
+				delay(500);
 			}
 
 			Calendar end = Calendar.getInstance();
