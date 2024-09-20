@@ -66,6 +66,72 @@ public class SortShow extends JPanel {
 			//giving j element in lines_lengths the value of temp
 			lines_lengths[j] = temp;
 		}
+
+		public void RadixSort(){
+			Calendar start = Calendar.getInstance();
+			int max = getMax(lines_lengths);
+			for(int exp = 1; max / exp > 0; exp *= 10){
+				countingSort(lines_lengths, exp);
+				paintComponent(this.getGraphics());
+				delay(10);
+			}
+
+			Calendar end = Calendar.getInstance();
+			SortGUI.radixTime = end.getTime().getTime() - start.getTime().getTime();
+		}
+
+		public int getMax(int[] arr){
+			int max = arr[0];
+			for (int i = 1; i < arr.length; i++){
+				if(arr[i] > max){
+					max = arr[i];
+				}
+			}
+			return max;
+		}
+
+		public void countingSort(int[] arr, int exp){
+			int n = arr.length;
+			int[] output = new int[n];
+			int[] count = new int[10];
+			for(int i = 0; i < 10; i++){
+				count[i] = 0;
+			}
+			for(int i = 0; i < n; i++){
+				int digit = (arr[i] / exp) % 10;
+				count[digit]++;
+			}
+			for(int i = 1; i < 10; i++){
+				count[i] += count[i - 1];
+			}
+			for(int i = n - 1; i >= 0; i--){
+				int digit = (arr[i] / exp) % 10;
+				output[count[digit] - 1] = arr[i];
+				count[digit] --;
+			}
+			for(int i = 0; i < n; i++){
+				arr[i] = output[i];
+			}
+		}
+
+		public void ShellSort(){
+			Calendar start = Calendar.getInstance90;
+			int n = lines_lengths.length;
+			for(int gap = n / 2; gap > 0; gap /= 2){
+				for(int i = gap; i < n; i++){
+					int temp = lines_lengths[i];
+					int j;
+					for(j = i; j >= gap && lines_lengths[j - gap] > temp; j -= gap) {
+						lines_lengths[j] = lines_lengths[j - gap];
+					}
+					lines_lengths[j] = temp;
+					paintComponent(this.getGraphics());
+					delay(10);
+				}
+			}
+			Calendar end = Calendar.getInstance90;
+			SortGUI.shellTime = end.getTime.getTime() - start.getTime().getTime();
+		}
 		
 		//The selectionSort method
 		public void SelectionSort() {
