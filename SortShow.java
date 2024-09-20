@@ -115,7 +115,7 @@ public class SortShow extends JPanel {
 		}
 
 		public void ShellSort(){
-			Calendar start = Calendar.getInstance90;
+			Calendar start = Calendar.getInstance();
 			int n = lines_lengths.length;
 			for(int gap = n / 2; gap > 0; gap /= 2){
 				for(int i = gap; i < n; i++){
@@ -129,8 +129,8 @@ public class SortShow extends JPanel {
 					delay(10);
 				}
 			}
-			Calendar end = Calendar.getInstance90;
-			SortGUI.shellTime = end.getTime.getTime() - start.getTime().getTime();
+			Calendar end = Calendar.getInstance();
+			SortGUI.shellTime = end.getTime().getTime() - start.getTime().getTime();
 		}
 		
 		//The selectionSort method
